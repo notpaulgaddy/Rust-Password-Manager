@@ -8,8 +8,9 @@ Save to specific file in folder
 
 Keywords
 Update
-Delete
-Add
-View
-End
+Delete 
+Add ✅
+View ✅
+End ✅
 Save
+Import

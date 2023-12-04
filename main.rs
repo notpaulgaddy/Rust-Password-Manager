@@ -46,12 +46,23 @@ fn main() {
 
                     my_map.insert(app_name.trim().to_string(), (username.trim().to_string(), password.trim().to_string()));
                 }
+                "view" => {
+                    for (app_name, (username, password)) in &my_map {
+                        println!("Application: {}", app_name);
+                        println!("Username: {}", username);
+                        println!("Password: {}", password);
+                        println!();
+                    }
+                }
                 "end" => {
                     println!("Goodbye!");
                     break;
                 }
                 _ => {
                     println!("Unknown command: {}", input);
+                }
+                "update" => {
+                    
                 }
             }
         }
