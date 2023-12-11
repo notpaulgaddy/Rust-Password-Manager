@@ -2,6 +2,8 @@ use std::collections::HashMap;
 use std::io;
 use std::fs::File;
 use std::io::Write;
+use std::env;
+use std::fs;
 
 fn main() {
     let mut start = String::new();
@@ -165,6 +167,31 @@ fn main() {
                         output.push_str("\n");
                         data_file.write(output.as_bytes()).expect("write failed");
                     }
+                }
+                "import" => {
+                    let mut import_file_name = String::new();
+                    println!("Enter the name of the text file to import:");
+                    io::stdin()
+                        .read_line(&mut import_file_name)
+                        .expect("Failed to read line");
+        
+                    // Read through the txt file
+                    let file_contents = fs::read_to_string(import_file_name.trim())
+                        .expect("Failed to read file");
+        
+                    // Split file contents by lines and process each line
+                    for line in file_contents.lines() {
+                        let parts: Vec<&str> = line.split_whitespace().collect();
+                        if parts.len() == 3 {
+                            let company_name = parts[0];
+                            let email = parts[1];
+                            let password = parts[2];
+                            txtPasswords.insert(company_name.to_string(), (email.to_string(), password.to_string()));
+                        } else {
+                            println!("Invalid line format: {}", line);
+                        }
+                    }
+                    println!("Data imported successfully.");
                 }
                 _ => {
                     println!("Unknown command: {}", input);
